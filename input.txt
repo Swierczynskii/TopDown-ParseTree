@@ -1,0 +1,3 @@
+S -> rXd|rZd
+X -> oa|ea
+Z -> a1
