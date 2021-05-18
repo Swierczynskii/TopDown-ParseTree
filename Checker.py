@@ -45,10 +45,8 @@ def arrowCheck(line):
 
 ## Checker
 def checkString(str_):
-    
     if str_ == "$":
         return str_
-    
 
     for ch in str_:
         if ch == "$":
@@ -56,8 +54,11 @@ def checkString(str_):
                 print("\nError: Given string cannot contain special character '$'",
                 "\ntogether with any other characters.",
                 "\n")
-                return Exception
-    return str_
+                return False
+        if ch.isupper():
+            print("\nError: Given string cannot contain capital letters\n")
+            return False
+    return True
 
 ## Checker
 def spaceCounter(num):
@@ -66,4 +67,43 @@ def spaceCounter(num):
         "\none to the left and one to the right.",
         "\n")
         return True
+    return False
+
+## Checker
+def ifRepeat(nonTerminals):
+    for ch in nonTerminals:
+        j = 0
+        for ch2 in nonTerminals:
+            if ch == ch2:
+                j += 1
+        if j > 1:
+            print("\nError: There are some repetitions of non-terminal values in CFG.\n")
+            return True
+    return False
+
+## Checker
+def isConnected(nonTerminals, nTermValue):
+    for term in nonTerminals:
+        i = 0
+        for value in nTermValue:
+            for ch in value:
+                if term == ch:
+                    i += 1
+        if term != 'S' and i == 0:
+            print("\nError: There is at least one non-terminal value in CFG",
+            "\nwhich is not defined in any rules of production\n")
+            return True
+    
+    for value in nTermValue:
+        for ch in value:
+            i = 0
+            if ch.isupper():
+                for term in nonTerminals:
+                    if ch == term:
+                        i += 1
+                if i == 0:
+                    print("\nError: There is at least one non-terminal value in CFG",
+                    "\nwhich has not its rules of production defined\n")
+                    return True
+                    
     return False
