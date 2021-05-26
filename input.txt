@@ -1,3 +1,8 @@
-S -> rXd|rZd
-X -> oa|ea
-Z -> a1
+S -> r$Xd|lXd
+X -> oa|Z
+Z -> B|C
+B -> $
+C -> D|E
+D -> e|F
+F -> b|ea
+E -> null
