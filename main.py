@@ -7,7 +7,7 @@ def helper():
 def readInput():
     filename = 'input.txt'
     #str_ = input("Give me the word to check:")
-    str_ = "read"
+    str_ = "lead"
     return filename, str_
 
 def main():
@@ -18,8 +18,6 @@ def main():
         p.parse(filename, str_)
     except Exception:
         return
-
-
 
 if __name__ == '__main__':
     main()
