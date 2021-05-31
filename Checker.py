@@ -44,10 +44,10 @@ def arrowCheck(line):
     return False
 
 ## Checker
-def checkString(str_):
+def checkString(str_, NonTerminalDic):
     if str_ == "$":
-        return str_
-
+        emptyString(str_, NonTerminalDic)
+        return True
     for ch in str_:
         if ch == "$":
             if len(str_) > 1:
@@ -107,3 +107,24 @@ def isConnected(nonTerminals, nTermValue):
                     return True
                     
     return False
+
+## Checker
+def isInfiniteLoop(NonTerminalDic):
+    for key in NonTerminalDic.keys():
+        for val in NonTerminalDic[key]:
+            if val == key:
+                print("\nError: CFG written in a way, that there is possibility",
+                "\nto jump into infinite loop, while creating a tree\n")
+                return True
+    return False
+
+## Checker check for empty string
+def emptyString(inputStr, NonTerminalDic):
+    if inputStr != '$':
+        print("\nError: Something went wrong\n")
+        return
+
+    for key in NonTerminalDic.keys():
+        for val in NonTerminalDic[key]:
+            print("\n", val, "\n")
+    

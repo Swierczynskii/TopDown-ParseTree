@@ -39,17 +39,20 @@ class ParseTree:
 
     def editNode(self, value, kidsIndex, NonTerminalDic, parent):
         kidsIndex+=1
-        print(value)
         for key in NonTerminalDic.keys():
             if key == value:
                 if kidsIndex >= len(NonTerminalDic[key]):
+                    print("\nDeleting node:",value, "\n")
                     self.removeNode(value)
-                    print(value)
                     print("\nYet another backtracking...\n")
                     prnt = self.findByValue(parent)
+                    if value == 'S':
+                        return None
                     return self.editNode(prnt.value, 0, NonTerminalDic, prnt.parent)
                 else:
                     next_rules = NonTerminalDic[key][kidsIndex]
+
+        print("\nDeleting node:", value, "\n")
         self.removeNode(value)
         self.addNode(value, next_rules, parent)
         new_node = self.nodes[self.findNodesIndex(value)]
@@ -61,7 +64,7 @@ class ParseTree:
             if child.isupper():
                 for key in NonTerminalDic.keys():
                     if child == key:
-                        self.addNode(child, NonTerminalDic[key][0], root.value) #most left rules of production
+                        self.addNode(child, NonTerminalDic[key][0], root.value) #most left rule of production
                         self.printTree()
                         index = self.createTree(NonTerminalDic, self.findByValue(child), inputStr, index, 0)
             else:
@@ -69,13 +72,29 @@ class ParseTree:
                     self.addNode(child, None, root.value)
                     self.printTree()
                     index+=1
+                    if index == len(inputStr):
+                        for node in self.nodes:
+                            if node.value.isupper():
+                                pass
+                            else:
+                                print(node)
+                        break
+                elif child == '$':
+                    if len(root.children) == 1 and index != len(inputStr):
+                        print("\nBacktracking...\n")
+                        new_root = self.editNode(root.value, kidsIndex, NonTerminalDic, root.parent)
+                        self.printTree()
+                        index = self.createTree(NonTerminalDic, new_root, inputStr, index, kidsIndex+1)
                 else:
-                    print(root.value)
-                    print("\nBacktracking...\n")
+                    print("\nChild for which we need backtracking:",child)
+                    print("Backtracking...\n")
                     new_root = self.editNode(root.value, kidsIndex, NonTerminalDic, root.parent)
+                    if new_root == None:
+                        break
                     self.printTree()
                     index = self.createTree(NonTerminalDic, new_root, inputStr, index, kidsIndex+1)
-                    return index
+                    if len(root.children) != 1:
+                        break 
         return index
                         
 

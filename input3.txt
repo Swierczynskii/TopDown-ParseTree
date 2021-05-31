@@ -1,0 +1,7 @@
+S -> r$Xd|lXd
+X -> oa|Z
+Z -> B|C
+B -> $
+C -> $|FF
+F -> b|e|$E
+E -> a|C

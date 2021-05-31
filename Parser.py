@@ -1,9 +1,9 @@
 import Checker as check
 from PTree import ParseTree
+
 ## Parser
 def readFile(filename):  
     f = open(filename, 'r')
-
     filestr = ""
     nTermValue = []
     nonTerminals = []
@@ -59,6 +59,9 @@ def readFile(filename):
         print("\nError: Something went wrong :(", "\n")
         return None
 
+    if check.isInfiniteLoop(NonTerminalDic):
+        return None
+
     return NonTerminalDic
 
 ## Parser
@@ -69,16 +72,20 @@ def parse(filename, str_):
     if NonTerminalDic == None:
         return Exception
 
-    if check.checkString(str_):
+    if check.checkString(str_, NonTerminalDic):
         inputStr = str_
     else:
         return Exception
+        
     tree = ParseTree()
     tree.addRoot(list(NonTerminalDic.keys())[0], NonTerminalDic[list(NonTerminalDic.keys())[0]][0], None)
     tree.printTree()
 
       #tree.createTree(dictionary, root, 'read', string_index, kids_index) 
-    if tree.createTree(NonTerminalDic, tree.nodes[0], inputStr, 0, 0) == None:
+    index = tree.createTree(NonTerminalDic, tree.nodes[0], inputStr, 0, 0)
+
+    if index != len(inputStr):
+        print("\nError: Program could not process string in such CFG\n")
         return Exception
     
     return
