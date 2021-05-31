@@ -1,8 +1,0 @@
-S -> r$Xd|lXd
-X -> oa|Z
-Z -> B|C
-B -> $
-C -> D|E
-D -> e|F
-F -> b|ea
-E -> null
