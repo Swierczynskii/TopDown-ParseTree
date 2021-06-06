@@ -2,7 +2,7 @@
 
 def test1():    #
     filename = 'input.txt'
-    str_ = "read"
+    str_ = "read$"
     return filename, str_
 
 def test2():
@@ -31,6 +31,6 @@ def test6():
     return filename, str_
 
 def test7():
-    filename = "input7.txt"
+    filename = "input6.txt"
     str_ = "bbaa"
     return filename, str_
