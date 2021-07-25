@@ -7,6 +7,11 @@ def readInput():
     str_ = input("\nGive the string to be checked: ")
     return filename, str_
 
+def program():
+    print("\n______Program_______\n")
+    filename, str_ = readInput() # Call here chosen test method
+    p.parse(filename, str_)
+
 def tests():
     print("\n______TEST1_______\n")
     filename, str_ = t.test1()
@@ -30,14 +35,11 @@ def tests():
     filename, str_ = t.test7()
     p.parse(filename, str_)
     
-def main(): # In order to use written test, user needs to call a chosen test method in marked place
+def main(): # User needs to uncomment program() function and comment tests() function in order to use program for his/her purposes
     
-    #while(True):
     try: 
-        #tests()
-        print("\n______Program_______\n")
-        filename, str_ = readInput() # Call here chosen test method
-        p.parse(filename, str_)
+        tests()
+        #program()
     except Exception:
         return
 
